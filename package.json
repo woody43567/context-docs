@@ -1,0 +1,16 @@
+{
+  "name": "context-docs",
+  "version": "1.0.0",
+  "description": "AI-optimized context documentation generator for .NET packages",
+  "bin": {
+    "context-docs": "./bin/context-docs.js"
+  },
+  "keywords": [
+    "claude-code",
+    "context7",
+    "documentation",
+    "ai",
+    "dotnet"
+  ],
+  "license": "MIT"
+}

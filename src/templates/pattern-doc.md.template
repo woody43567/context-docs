@@ -1,0 +1,24 @@
+# {Pattern Name}
+
+## When to Use
+<!-- One-line: when should an agent apply this pattern? -->
+
+## Class Hierarchy / Structure
+```
+<!-- ASCII tree or diagram of the key types -->
+```
+
+## Required Overrides / Steps
+<!-- Bulleted list of what must be implemented -->
+
+## Complete Example
+```csharp
+// Source: {path/to/actual/file.cs}
+// Full working example pulled from the codebase
+```
+
+## Common Mistakes
+<!-- - What agents get wrong, with the correct alternative -->
+
+## Related
+<!-- - Links to related pattern and domain docs -->

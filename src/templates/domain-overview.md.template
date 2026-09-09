@@ -1,0 +1,21 @@
+# {Domain} Domain
+
+## Entities
+| Entity | Namespace | Table | Implements | Key Relationships |
+|--------|-----------|-------|------------|-------------------|
+
+## Repositories & Their Filters
+| Repository | Base Class | Filter | Key Filter Properties |
+|------------|------------|--------|----------------------|
+
+## DI Registration
+```csharp
+// Source: {path/to/ServiceCollectionExtensions.cs}
+// How this domain's services are registered
+```
+
+## Example: Adding a Query with Filter
+```csharp
+// Source: {path/to/actual/repository.cs}
+// Complete example showing filter → handler → query flow
+```

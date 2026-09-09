@@ -1,0 +1,27 @@
+{
+  "name": "context-docs",
+  "version": "1.0.0",
+  "description": "AI-optimized context documentation generator for .NET packages. Analyzes projects, generates pattern-focused docs, and maintains them automatically via hooks.",
+  "skills": [
+    {
+      "name": "context-docs-init",
+      "description": "Analyze a .NET project and generate AI-optimized context documentation for Context7",
+      "path": "src/skills/context-docs-init.md"
+    }
+  ],
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "command": "node ${PLUGIN_DIR}/src/hooks/context-tracker.js \"$FILE_PATH\""
+      }
+    ]
+  },
+  "agents": [
+    {
+      "name": "context-updater",
+      "description": "Updates stale context documentation after code changes",
+      "path": "src/agents/context-updater.md"
+    }
+  ]
+}

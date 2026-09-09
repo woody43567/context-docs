@@ -1,0 +1,22 @@
+# {ClassName}
+
+## Entity
+- **Namespace:** `{namespace}`
+- **Implements:** `{interfaces}`
+- **Key:** `{KeyProperty}` (`Guid`)
+- **File:** `{path/to/entity.cs}`
+
+## Repository
+- **Class:** `{RepositoryClass}` extends `{BaseClass}`
+- **Table:** `{TableName}`
+- **Multi-mapping:** {description of joins and splitOn}
+- **File:** `{path/to/repository.cs}`
+
+## Filter Properties
+| Property | Type | SQL Behaviour |
+|----------|------|---------------|
+
+## Usage Example
+```csharp
+// Source: {path/to/actual/usage.cs}
+```

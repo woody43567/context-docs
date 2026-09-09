@@ -1,0 +1,24 @@
+{
+  "package": {
+    "name": "",
+    "version": "1.0.0",
+    "exportPath": ".ai-context-docs/packages/"
+  },
+  "project": {
+    "path": ".",
+    "framework": "dotnet",
+    "solutionFile": ""
+  },
+  "focus": {
+    "patterns": [],
+    "domains": {},
+    "exclude": ["Tests/**", "obj/**", "bin/**"]
+  },
+  "conventions": {
+    "agentGotchas": []
+  },
+  "tracking": {
+    "lastFullBuild": null,
+    "coverage": {}
+  }
+}
