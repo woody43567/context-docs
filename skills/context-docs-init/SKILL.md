@@ -167,7 +167,27 @@ Follow these rules:
 - Include the full file path in code block comments so agents can find the source
 - Document the "why" behind conventions, not just the "what"
 
-### Phase 5: Build Context Package
+### Phase 5: Safety Review
+
+Before building the package, review ALL generated docs for leaks. Scan every `.md` file in the docs directory for:
+
+1. **Secrets/keys** — API keys, connection strings, passwords, tokens, bearer strings, base64-encoded secrets, GUIDs that look like keys (not entity IDs)
+2. **URLs** — internal URLs, IP addresses, server names, database connection endpoints, staging/production hostnames
+3. **Credentials** — usernames, email addresses in config, service account names
+4. **Proprietary content** — business rules described in prose rather than code structure, algorithm descriptions that reveal trade secrets, pricing logic, licensing mechanisms
+5. **Prompt content** — any system prompts, agent instructions, or AI configuration that was accidentally pulled from source files
+6. **PII** — customer names, real data examples pulled from test fixtures or seed data
+
+**For each issue found:**
+- Remove or redact the sensitive content
+- Replace with a placeholder if needed (e.g., `<connection-string>`, `<api-key>`)
+- Keep the surrounding code structure intact so the doc remains useful
+
+**Report the review results** to the user: "Safety review complete — found N issues in M files, all redacted." or "Safety review complete — clean, no issues found."
+
+Only proceed to building the package after the safety review passes.
+
+### Phase 6: Build Context Package
 
 **Full mode:**
 1. Run: `context add . --path .ai-context-docs/docs --name <package-name> --pkg-version <version> --save .ai-context-docs/packages/`
@@ -193,7 +213,7 @@ Append new scoped packages to the table if the file already exists. This ensures
 
 4. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @neuledge/context`
 
-### Phase 6: Project Integration
+### Phase 7: Project Integration
 
 1. Add to `CLAUDE.md` (idempotent — check if already present, append scoped packages to existing section):
 ```markdown

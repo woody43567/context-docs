@@ -34,10 +34,11 @@ You receive:
       - If yes: create new doc file(s) following the manifest's granularity settings, and add coverage entries to the manifest's `tracking.coverage`
       - If no (e.g., temporary files, build artifacts): skip silently
    d. Report what new areas were discovered and documented
-4. Rebuild the context package:
+4. **Safety review** — before rebuilding, scan all updated doc files for: API keys, connection strings, passwords, tokens, internal URLs, IP addresses, server names, credentials, PII, proprietary business logic described in prose, or prompt content. Redact any findings with placeholders (e.g., `<connection-string>`). Report any redactions made.
+5. Rebuild the context package:
    - Run: `context add . --path .ai-context-docs/docs --name <package.name> --pkg-version <package.version> --save .ai-context-docs/packages/`
-5. Clear `.ai-context-docs/.stale` (write empty file)
-6. Report what was updated
+6. Clear `.ai-context-docs/.stale` (write empty file)
+7. Report what was updated
 
 ## Doc Writing Rules
 
