@@ -18,6 +18,7 @@ Analyze a .NET project and generate AI-optimized markdown documentation for serv
    - **Base classes and class hierarchies** — abstract classes, interfaces, inheritance chains
    - **Domain directories** — how the codebase is organized by business domain or feature
    - **Mapping / serialization** — column mappers, automapper profiles, serialization config
+   - **Extension methods** — key extension methods that add behaviour to core types, utility extensions, builder extensions (agents often can't resolve these)
    - **Conventions** — naming patterns, namespace organization, file structure patterns
 3. Present a structured summary of findings:
    - Number of entities, services, data access classes found
