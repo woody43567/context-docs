@@ -164,8 +164,24 @@ Follow these rules:
 
 **Scoped mode:**
 1. Run: `context add . --path .ai-context-docs/scoped/<package-name>/docs --name <package-name> --pkg-version <version> --save .ai-context-docs/packages/`
+2. **Add scoped reference to main docs:** If a main `.ai-context-docs/docs/` exists, create or update `.ai-context-docs/docs/_scoped-packages.md`:
 
-2. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @anthropic/context`
+```markdown
+# Scoped Packages
+
+The following areas have dedicated context packages with more detailed documentation.
+Query these packages directly instead of looking in the main package.
+
+| Package | Scope | Query With |
+|---------|-------|------------|
+| `<package-name>` | `<scope-path>` | `resolve-library-id` → `<package-name>` |
+```
+
+Append new scoped packages to the table if the file already exists. This ensures agents querying the main package discover that scoped packages exist and know where to look.
+
+3. **Rebuild the main package** after adding the scoped reference so the pointer is included in the main `.db`.
+
+4. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @anthropic/context`
 
 ### Phase 6: Project Integration
 
