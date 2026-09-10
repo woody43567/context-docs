@@ -74,7 +74,9 @@ Ask the following questions **one at a time**. Prefer multiple choice where poss
    - C) Mixed — per-class for high-priority domains, per-domain for the rest (recommended)
 3. **Agent pain points:** "Are there patterns or areas where agents consistently get things wrong?" (free text)
 4. **Exclusions:** "Any directories or areas to exclude from documentation?" (default: Tests/**, obj/**, bin/**)
-   - **Always exclude** (even if user doesn't mention them): `appsettings*.json`, `*.secrets.json`, `.env`, `.env.*`, `**/secrets/**`, `**/credentials/**`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`
+   - **Always exclude** (even if user doesn't mention them):
+     - **Secrets/config:** `appsettings*.json`, `*.secrets.json`, `.env`, `.env.*`, `**/secrets/**`, `**/credentials/**`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`
+     - **Planning/dev files:** `docs/plans/**`, `.planning/**`, `**/PLAN.md`, `**/ROADMAP.md`, `**/TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`
    - These are hardcoded and cannot be overridden — never read or document files matching these patterns
 5. **Package details:** "What should the context package be named?" (suggest based on project name)
    - **Scoped mode:** This was already asked in Phase 1, skip unless the user wants to change it
@@ -205,4 +207,4 @@ For scoped packages, add an additional bullet under the Package list:
 - The manifest (`context.json`) must be generated BEFORE any docs, as it drives the doc structure.
 - In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
 - In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
-- NEVER read, document, or include examples from sensitive files: `appsettings*.json`, `*.secrets.json`, `.env`, `.env.*`, `**/secrets/**`, `**/credentials/**`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`. This is a security requirement and cannot be overridden.
+- NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`).
