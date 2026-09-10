@@ -17,6 +17,11 @@ You receive:
    - The `tracking.coverage` mapping from topics to source file globs
    - The `conventions.agentGotchas` that must be preserved
    - The `focus.domains` granularity settings
+3. **Check for missing `_untracked` globs:** If `tracking.coverage._untracked` does not exist in the manifest, generate it now:
+   - Look at the parent directories of existing coverage entries
+   - Create broad wildcard patterns that would catch new siblings (e.g., if coverage has `src/Services/Auth/` and `src/Services/Billing/`, add `_untracked: ["src/Services/*/"]`)
+   - Write the updated manifest back to `context.json`
+   - This is a self-healing step — manifests created before v1.4.0 will be fixed automatically
 3. For each stale topic:
    a. Read the current doc file(s) for that topic
    b. Read the changed source files that triggered the staleness
