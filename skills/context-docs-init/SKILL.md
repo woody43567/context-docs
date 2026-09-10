@@ -85,10 +85,13 @@ Ask the following questions **one at a time**. Prefer multiple choice where poss
 
 **Full mode:** Create `.ai-context-docs/context.json` capturing all preferences from Phase 2.
 
-**Scoped mode:** Create `.ai-context-docs/scoped/<package-name>/context.json`. Also update the main `.ai-context-docs/context.json` if it exists:
+**Scoped mode:** Create `.ai-context-docs/scoped/<package-name>/context.json`. Also update the main `.ai-context-docs/context.json`:
+   - If no main manifest exists, create a minimal one with just `focus.exclude` and `scope: null`. **Warn the user:** "No full init has been run for this repo. The main manifest only contains exclusions. Run `/context-docs-init` (full mode) to generate docs and coverage for the rest of the project."
+   - If a main manifest exists but `tracking.coverage` is empty (`{}`), **warn the user** with the same message — scoped packages alone don't provide full project coverage.
    - Add the scoped path to `focus.exclude` to prevent future duplication
    - Remove any coverage entries from `tracking.coverage` whose globs overlap with the scoped path
    - **Clean up overlapping docs:** Check if any existing docs in `.ai-context-docs/docs/` were generated from files inside the scoped path. If so, delete those doc files and their domain subfolders (they are now owned by the scoped package). Only do this if a main manifest already existed before the scoped init — this means a full init was previously run that included the scoped area.
+   - **Add scoped reference:** Create or update `.ai-context-docs/docs/_scoped-packages.md` with an entry for the new scoped package (see Phase 5 for format). If main docs exist, rebuild the main package so the reference is searchable.
 
 The manifest drives both initial generation and ongoing hook-based maintenance.
 
