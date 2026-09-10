@@ -73,7 +73,10 @@ Ask the following questions **one at a time**. Prefer multiple choice where poss
 
 **Full mode:** Create `.ai-context-docs/context.json` capturing all preferences from Phase 2.
 
-**Scoped mode:** Create `.ai-context-docs/scoped/<package-name>/context.json`. Also update the main `.ai-context-docs/context.json` exclude list to add the scoped path (if main manifest exists).
+**Scoped mode:** Create `.ai-context-docs/scoped/<package-name>/context.json`. Also update the main `.ai-context-docs/context.json` if it exists:
+   - Add the scoped path to `focus.exclude` to prevent future duplication
+   - Remove any coverage entries from `tracking.coverage` whose globs overlap with the scoped path
+   - **Clean up overlapping docs:** Check if any existing docs in `.ai-context-docs/docs/` were generated from files inside the scoped path. If so, delete those doc files and their domain subfolders (they are now owned by the scoped package). Only do this if a main manifest already existed before the scoped init — this means a full init was previously run that included the scoped area.
 
 The manifest drives both initial generation and ongoing hook-based maintenance.
 
