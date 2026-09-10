@@ -35,7 +35,8 @@ You receive:
       - If no (e.g., temporary files, build artifacts): skip silently
    d. Report what new areas were discovered and documented
 4. **Safety review** — before rebuilding, scan all updated doc files for: API keys, connection strings, passwords, tokens, internal URLs, IP addresses, server names, credentials, PII, proprietary business logic described in prose, or prompt content. Ignore known safe patterns: `CancellationToken`, method parameter names containing "token" in code signatures, generic type parameters, JWT claim type names. If real issues are found, list every finding with file, line, and what was detected, then ask the user to confirm: apply redactions, review manually, or abort. Never auto-continue when issues are found. If clean, proceed automatically.
-5. Rebuild the context package:
+5. **Update version** — set the patch segment of `package.version` in the manifest to today's date in YYMMDD format (e.g., `1.0.260910`). Keep the existing major.minor.
+6. Rebuild the context package:
    - Run: `context add . --path .ai-context-docs/docs --name <package.name> --pkg-version <package.version> --save .ai-context-docs/packages/`
 6. Clear `.ai-context-docs/.stale` (write empty file)
 7. Report what was updated

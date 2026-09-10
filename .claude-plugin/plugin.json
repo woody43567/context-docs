@@ -1,6 +1,6 @@
 {
   "name": "context-docs",
-  "version": "1.9.4",
+  "version": "1.10.0",
   "description": "AI-optimized context documentation generator. Analyzes projects, generates pattern-focused docs using the context CLI, and maintains them automatically via hooks.",
   "author": {
     "name": "Josh Wood"

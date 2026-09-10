@@ -107,7 +107,7 @@ Schema:
 {
   "package": {
     "name": "<package-name>",
-    "version": "1.0.0",
+    "version": "1.0.<YYMMDD>",
     "exportPath": ".ai-context-docs/packages/"
   },
   "project": {
@@ -192,6 +192,12 @@ Before building the package, review ALL generated docs for leaks. Scan every `.m
 **If no issues found:** Report "Safety review complete — clean, no issues found." and proceed automatically.
 
 ### Phase 6: Build Context Package
+
+**Versioning:** Package versions use the format `<major>.<minor>.<YYMMDD>` (e.g., `1.0.260910`).
+- Major/minor are set by the user during init (default `1.0`)
+- The patch segment is always today's date in YYMMDD format
+- On every rebuild (init, updater agent, verify fix), auto-update the patch to today's date
+- Update `package.version` in the manifest before building
 
 **Full mode:**
 1. Run: `context add . --path .ai-context-docs/docs --name <package-name> --pkg-version <version> --save .ai-context-docs/packages/`
