@@ -1,11 +1,21 @@
 {
+  "name": "context-docs",
+  "owner": {
+    "name": "Josh Wood"
+  },
   "plugins": [
     {
-      "id": "context-docs",
       "name": "context-docs",
-      "version": "1.0.0",
+      "source": "./",
       "description": "AI-optimized context documentation generator for .NET packages. Analyzes projects, generates pattern-focused docs, and maintains them automatically via hooks.",
-      "path": "."
+      "version": "1.0.0",
+      "category": "development",
+      "keywords": [
+        "context7",
+        "documentation",
+        "dotnet",
+        "ai-context"
+      ]
     }
   ]
 }
