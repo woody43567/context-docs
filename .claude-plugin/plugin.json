@@ -1,0 +1,17 @@
+{
+  "name": "context-docs",
+  "version": "1.0.0",
+  "description": "AI-optimized context documentation generator. Analyzes projects, generates pattern-focused docs for Context7, and maintains them automatically via hooks.",
+  "author": {
+    "name": "Josh Wood"
+  },
+  "repository": "https://github.com/woody43567/context-docs",
+  "license": "MIT",
+  "keywords": [
+    "context7",
+    "documentation",
+    "dotnet",
+    "ai-context"
+  ],
+  "skills": "./src/skills/"
+}
