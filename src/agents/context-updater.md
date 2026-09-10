@@ -56,6 +56,7 @@ You receive:
 - Do NOT add documentation for test files unless configured in the manifest
 - Do NOT remove existing examples unless the source code they reference was deleted
 - Do NOT add prose explanations — keep it terse and example-driven
+- NEVER read, document, or include examples from sensitive files: `appsettings*.json`, `*.secrets.json`, `.env`, `.env.*`, `**/secrets/**`, `**/credentials/**`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`
 
 ## Template Reference
 
