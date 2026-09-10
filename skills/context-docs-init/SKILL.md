@@ -178,6 +178,7 @@ Before building the package, review ALL generated docs for leaks. Scan every `.m
 4. **Proprietary content** — business rules described in prose rather than code structure, algorithm descriptions that reveal trade secrets, pricing logic, licensing mechanisms
 5. **Prompt content** — any system prompts, agent instructions, or AI configuration that was accidentally pulled from source files
 6. **PII** — customer names, real data examples pulled from test fixtures or seed data
+7. **Context7 references** — any mention of `Context7`, `context7`, `resolve-library-id`, `get-library-docs`, or `@anthropic/context` in generated docs. Replace with `context query` CLI syntax.
 
 **If issues are found:**
 1. List every finding with the file, line, and what was detected
