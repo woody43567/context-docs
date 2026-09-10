@@ -1,3 +1,11 @@
+---
+name: context-docs-init
+description: |
+  Analyze a .NET project and generate AI-optimized context documentation for Context7.
+  Discovers entities, repositories, patterns, and conventions, then generates searchable docs.
+user-invocable: true
+---
+
 # /context-docs-init — Generate AI-Optimized Context Documentation
 
 ## Overview
