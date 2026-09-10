@@ -178,14 +178,16 @@ Before building the package, review ALL generated docs for leaks. Scan every `.m
 5. **Prompt content** — any system prompts, agent instructions, or AI configuration that was accidentally pulled from source files
 6. **PII** — customer names, real data examples pulled from test fixtures or seed data
 
-**For each issue found:**
-- Remove or redact the sensitive content
-- Replace with a placeholder if needed (e.g., `<connection-string>`, `<api-key>`)
-- Keep the surrounding code structure intact so the doc remains useful
+**If issues are found:**
+1. List every finding with the file, line, and what was detected
+2. Show the proposed redaction for each (replacement with placeholder)
+3. **Ask the user to review:** "I found N potential issues. Please review the list above. Options:"
+   - A) Apply all redactions and continue
+   - B) Let me review the files manually first (pause and wait)
+   - C) Abort — do not build the package
+4. Only proceed after explicit user confirmation. Never auto-continue when issues are found.
 
-**Report the review results** to the user: "Safety review complete — found N issues in M files, all redacted." or "Safety review complete — clean, no issues found."
-
-Only proceed to building the package after the safety review passes.
+**If no issues found:** Report "Safety review complete — clean, no issues found." and proceed automatically.
 
 ### Phase 6: Build Context Package
 
