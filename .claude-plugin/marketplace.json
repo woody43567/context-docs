@@ -1,0 +1,11 @@
+{
+  "plugins": [
+    {
+      "id": "context-docs",
+      "name": "context-docs",
+      "version": "1.0.0",
+      "description": "AI-optimized context documentation generator for .NET packages. Analyzes projects, generates pattern-focused docs, and maintains them automatically via hooks.",
+      "path": "."
+    }
+  ]
+}
