@@ -26,8 +26,16 @@ Analyzes the entire project. Generates docs in `.ai-context-docs/docs/` with a m
 ### Scoped mode
 ```
 /context-docs-init src/MyPackage
+/context-docs-init src/MBS.ImageStudio.*
 ```
-Analyzes only the specified subfolder. Generates docs in `.ai-context-docs/scoped/<package-name>/docs/` with a separate manifest at `.ai-context-docs/scoped/<package-name>/context.json`. The scoped path is automatically added to the main manifest's exclude list (if one exists) to avoid duplication.
+Analyzes only the specified path(s). Generates docs in `.ai-context-docs/scoped/<package-name>/docs/` with a separate manifest at `.ai-context-docs/scoped/<package-name>/context.json`. The scoped path is automatically added to the main manifest's exclude list (if one exists) to avoid duplication.
+
+**Wildcard support:** The path argument supports glob patterns (e.g., `src/MBS.ImageStudio.*`). When a wildcard is provided:
+1. Expand the glob to find all matching directories
+2. Present the matched directories to the user for confirmation: "I found these directories matching `src/MBS.ImageStudio.*`: [list]. Include all of them?"
+3. Treat all matched directories as a single scoped package — analyze them together, generate unified docs
+4. Store the original glob pattern in the manifest's `scope` field
+5. Use the glob pattern (not individual paths) in coverage entries and the main manifest's exclude list
 
 **Determine the mode from the arguments.** If a path argument is provided, use scoped mode. Otherwise, use full mode.
 
