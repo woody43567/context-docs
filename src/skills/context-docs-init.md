@@ -105,6 +105,14 @@ Create the `.ai-context-docs/docs/` tree following these rules:
 1. Add to `CLAUDE.md` (idempotent — check if already present):
 ```markdown
 ## Context Docs
+
+This project has AI-optimized documentation served via Context7. Before implementing against
+any pattern or domain in this package, query the context server for guidance:
+
+- **Package:** `<package-name>` (<section-count> sections covering patterns, entities, repositories, filters)
+- **Query with short keywords:** e.g. `repository`, `filter handler`, `entity`, `dapper`
+- **Use Context7 MCP tools:** `resolve-library-id` → `get-library-docs` with topic keywords
+
 When you finish a task or phase, check `.ai-context-docs/.stale`. If non-empty, spawn
 the context-updater agent (`.ai-context-docs/agents/context-updater.md`) to update
 documentation. Do not update docs inline.
