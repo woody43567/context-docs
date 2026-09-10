@@ -81,20 +81,20 @@ Present results as a checklist:
 ```
 ## Context Docs Health Report
 
-- [x] Stale docs — clean
-- [ ] Missing _untracked globs — FOUND in main manifest
-- [x] Scoped package references — all present
-- [ ] Scoped exclusions — "src/MyPackage" not excluded from main
-- [x] Manifest schema — up to date
-- [x] Orphaned docs — none
-- [ ] Package freshness — main package is 3 days behind docs
-- [x] CLAUDE.md integration — present
-- [x] Sensitive file exposure — clean
+✅ Stale docs — clean
+❌ Missing _untracked globs — FOUND in main manifest
+✅ Scoped package references — all present
+❌ Scoped exclusions — "src/MyPackage" not excluded from main
+✅ Manifest schema — up to date
+✅ Orphaned docs — none
+❌ Package freshness — main package is 3 days behind docs
+✅ CLAUDE.md integration — present
+✅ Sensitive file exposure — clean
 
 ### Issues (3 found)
-1. **Missing _untracked globs** in main manifest — [Fix now?]
-2. **Scoped exclusion missing** — `src/MyPackage` not in main exclude list — [Fix now?]
-3. **Package stale** — main .db is older than docs — [Rebuild now?]
+1. ❌ **Missing _untracked globs** in main manifest — [Fix now?]
+2. ❌ **Scoped exclusion missing** — `src/MyPackage` not in main exclude list — [Fix now?]
+3. ❌ **Package stale** — main .db is older than docs — [Rebuild now?]
 ```
 
 After presenting the report, ask: "Want me to fix all issues, or select specific ones?"
