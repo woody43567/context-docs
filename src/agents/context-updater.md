@@ -56,7 +56,8 @@ You receive:
 - Do NOT add documentation for test files unless configured in the manifest
 - Do NOT remove existing examples unless the source code they reference was deleted
 - Do NOT add prose explanations — keep it terse and example-driven
-- NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`)
+- NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`), planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`), or prompts/AI instructions (`**/prompts/**`, `**/*.prompt`, `**/SKILL.md`, `**/.claude/**`, `**/skills/**`, `**/agents/**`, `**/.cursorrules`, `**/.clinerules`)
+- **Purpose guard:** These docs exist solely to help AI agents understand code patterns, classes, and APIs. Never include proprietary algorithms, trade secrets, prompt content, or business logic beyond what's needed to show code structure and usage.
 - **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the community registry or any remote endpoint.
 
 ## Template Reference

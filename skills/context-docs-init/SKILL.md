@@ -82,7 +82,9 @@ Ask the following questions **one at a time**. Prefer multiple choice where poss
    - **Always exclude** (even if user doesn't mention them):
      - **Secrets/config:** `appsettings*.json`, `*.secrets.json`, `.env`, `.env.*`, `**/secrets/**`, `**/credentials/**`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`
      - **Planning/dev files:** `docs/plans/**`, `.planning/**`, `**/PLAN.md`, `**/ROADMAP.md`, `**/TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`
+     - **Prompts/AI instructions:** `**/prompts/**`, `**/*.prompt`, `**/*.prompt.md`, `**/SKILL.md`, `**/.claude/**`, `**/skills/**`, `**/agents/**`, `**/.cursorrules`, `**/.clinerules`, `**/.github/copilot-instructions.md`, any file that contains system prompts, agent instructions, or proprietary prompt engineering
    - These are hardcoded and cannot be overridden — never read or document files matching these patterns
+   - **Purpose guard:** The generated docs exist solely to help AI agents understand code patterns, classes, and APIs. Never include business logic descriptions, proprietary algorithms, trade secrets, prompt content, or any content that exposes intellectual property beyond code structure and usage patterns.
 5. **Package details:** "What should the context package be named?" (suggest based on project name)
    - **Scoped mode:** This was already asked in Phase 1, skip unless the user wants to change it
 
@@ -231,5 +233,6 @@ For scoped packages, add an additional bullet under the Package list:
 - The manifest (`context.json`) must be generated BEFORE any docs, as it drives the doc structure.
 - In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
 - In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
-- NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`).
+- NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`), planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`), or prompts/AI instructions (`**/prompts/**`, `**/*.prompt`, `**/SKILL.md`, `**/.claude/**`, `**/skills/**`, `**/agents/**`, `**/.cursorrules`, `**/.clinerules`).
+- **Purpose guard:** These docs exist solely to help AI agents understand code patterns, classes, and APIs. Never include proprietary algorithms, trade secrets, prompt content, or business logic beyond what's needed to show code structure and usage.
 - **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the the context CLI community registry or any remote endpoint.
