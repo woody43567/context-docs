@@ -104,13 +104,18 @@ Schema:
   "tracking": {
     "lastFullBuild": "<ISO timestamp>",
     "coverage": {
-      "<doc-topic>": ["<glob patterns matching source files>"]
+      "<doc-topic>": ["<glob patterns matching source files>"],
+      "_untracked": ["<broad catch-all globs covering the project's source areas>"]
     }
   }
 }
 ```
 
-For scoped manifests, set `"scope": "<relative-path-to-subfolder>"` and make all coverage globs relative to the repo root (not the scoped folder).
+**`_untracked` catch-all globs:** The `_untracked` entry in coverage must always be generated. It should contain broad glob patterns that cover the project's main source directories (e.g., `Data/MBS.Data.Common/*/`, `Entity/Entity.*/`). When a file is edited that doesn't match any known topic but matches an `_untracked` glob, the hook flags it as `_untracked` in `.stale`. The updater agent then investigates whether new areas appeared that need documentation.
+
+Generate `_untracked` globs by looking at the parent directories of the known coverage entries and creating wildcard patterns that would catch new siblings. For example, if you have coverage for `src/Services/Auth/` and `src/Services/Billing/`, the catch-all would be `src/Services/*/`.
+
+For scoped manifests, set `"scope": "<relative-path-to-subfolder>"` and make all coverage globs (including `_untracked`) relative to the repo root (not the scoped folder).
 
 ### Phase 4: Generate Documentation
 

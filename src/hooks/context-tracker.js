@@ -56,15 +56,32 @@ function checkManifest(manifestPath, relativeChanged, prefix) {
   const coverage = manifest.tracking?.coverage;
   if (!coverage) return [];
 
+  // Check if the file matches any known coverage glob
   const matched = [];
+  let coveredByAnyGlob = false;
+
   for (const [topic, globs] of Object.entries(coverage)) {
+    if (topic === "_untracked") continue; // skip catch-all when checking known topics
     for (const glob of globs) {
       if (matchesGlob(relativeChanged, glob)) {
         matched.push(prefix ? `${prefix}:${topic}` : topic);
+        coveredByAnyGlob = true;
         break;
       }
     }
   }
+
+  // If not covered by any known topic, check against catch-all globs
+  // This detects new directories/files that appeared after init
+  if (!coveredByAnyGlob && coverage._untracked) {
+    for (const glob of coverage._untracked) {
+      if (matchesGlob(relativeChanged, glob)) {
+        matched.push(prefix ? `${prefix}:_untracked` : "_untracked");
+        break;
+      }
+    }
+  }
+
   return matched;
 }
 

@@ -22,6 +22,13 @@ You receive:
    b. Read the changed source files that triggered the staleness
    c. Determine what changed: new classes, modified signatures, new patterns, removed code
    d. Update the doc to reflect the current state of the code
+4. **Handle `_untracked` topics:** If the stale list contains `_untracked` (or `<scope>:_untracked`):
+   a. Compare the current directory structure against the coverage globs in the manifest
+   b. Identify new directories or files that don't belong to any existing topic
+   c. For each new area found, decide if it warrants documentation:
+      - If yes: create new doc file(s) following the manifest's granularity settings, and add coverage entries to the manifest's `tracking.coverage`
+      - If no (e.g., temporary files, build artifacts): skip silently
+   d. Report what new areas were discovered and documented
 4. Rebuild the context package:
    - Run: `context add . --path .ai-context-docs/docs --name <package.name> --pkg-version <package.version> --save .ai-context-docs/packages/`
 5. Clear `.ai-context-docs/.stale` (write empty file)
