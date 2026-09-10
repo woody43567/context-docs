@@ -74,6 +74,12 @@ Run all checks below, then present a summary report. For each issue found, offer
 2. Flag any docs that contain content sourced from sensitive files
 3. **Fix:** Remove the sensitive content and regenerate the affected doc from non-sensitive sources
 
+### Check 10: Context7 References
+
+1. Scan all doc files, manifests, `_scoped-packages.md`, and `CLAUDE.md` for references to `Context7`, `context7`, `resolve-library-id`, `get-library-docs`, or `@anthropic/context`
+2. These are outdated references from earlier versions of the plugin — docs should use the `context query` CLI command instead
+3. **Fix:** Replace with correct `context query <package-name> '<keyword>'` syntax
+
 ## Report Format
 
 Present results as a checklist:
@@ -90,6 +96,7 @@ Present results as a checklist:
 ❌ Package freshness — main package is 3 days behind docs
 ✅ CLAUDE.md integration — present
 ✅ Sensitive file exposure — clean
+✅ Context7 references — clean
 
 ### Issues (3 found)
 1. ❌ **Missing _untracked globs** in main manifest — [Fix now?]
