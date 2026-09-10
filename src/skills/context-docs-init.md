@@ -10,18 +10,20 @@ Analyze a .NET project and generate AI-optimized markdown documentation for serv
 
 1. Ask the user which project path to analyze (default: current working directory)
 2. Scan the project to discover:
-   - Solution and project files (`.sln`, `.csproj`)
-   - Entity classes (look for `IHasId`, `IHasDescriptionId`, `IHasCodeDescriptionId` implementations)
-   - Repository classes (look for `GenericRepository`, `GenericRepositoryWithFilter` subclasses)
-   - Filter and FilterHandler classes (look for `IFilter`, `IFilterHandler` implementations)
-   - DI registration files (`ServiceCollectionExtensions.cs` or similar)
-   - Base classes and class hierarchies
-   - Domain directories and their contents
+   - Project/solution structure (`.sln`, `.csproj`, `package.json`, `pyproject.toml`, etc.)
+   - **Domain model / entities** — data classes, models, DTOs, database entities
+   - **Data access layer** — repositories, data services, ORM patterns, query builders, database context classes
+   - **Filtering / querying patterns** — filter objects, query handlers, specifications, search patterns
+   - **Dependency injection / service registration** — how services are wired up
+   - **Base classes and class hierarchies** — abstract classes, interfaces, inheritance chains
+   - **Domain directories** — how the codebase is organized by business domain or feature
+   - **Mapping / serialization** — column mappers, automapper profiles, serialization config
+   - **Conventions** — naming patterns, namespace organization, file structure patterns
 3. Present a structured summary of findings:
-   - Number of entities, repositories, filters found
+   - Number of entities, services, data access classes found
    - Detected domains (by directory structure)
-   - Detected patterns and base class hierarchies
-   - Any conventions noticed (naming, namespace patterns, etc.)
+   - Detected patterns and class hierarchies
+   - Any conventions noticed (naming, namespace, file organization, etc.)
 
 ### Phase 2: Clarifying Questions
 
