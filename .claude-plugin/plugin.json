@@ -13,5 +13,5 @@
     "dotnet",
     "ai-context"
   ],
-  "skills": "./src/skills/"
+  "skills": "./skills/"
 }
