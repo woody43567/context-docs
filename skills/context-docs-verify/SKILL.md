@@ -104,3 +104,5 @@ After presenting the report, ask: "Want me to fix all issues, or select specific
 - This skill is read-only by default — it only makes changes when the user approves fixes
 - Always present the full report before offering fixes
 - When fixing, process in order: manifest fixes first, then doc fixes, then package rebuild last
+- **NEVER publish, push, or submit packages to any external registry or service.** All context packages are private internal documentation. Package rebuilds must only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the Context7 community registry or any remote endpoint.
+- When rebuilding packages, always use the exact command: `context add . --path <docs-path> --name <name> --pkg-version <version> --save .ai-context-docs/packages/`

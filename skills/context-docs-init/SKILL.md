@@ -227,3 +227,4 @@ For scoped packages, add an additional bullet under the Package list:
 - In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
 - In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
 - NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`).
+- **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the Context7 community registry or any remote endpoint.
