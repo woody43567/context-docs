@@ -44,7 +44,12 @@ Analyzes only the specified path(s). Generates docs in `.ai-context-docs/scoped/
 ### Phase 1: Project Discovery
 
 1. **Full mode:** Ask the user which project path to analyze (default: current working directory)
-   **Scoped mode:** Use the provided path argument. Confirm with the user: "I'll analyze `<path>` as a scoped package. What should it be named?"
+   **Scoped mode:** Use the provided path argument. Suggest a package name by checking (in order of preference):
+     1. NuGet package name — look for a `.csproj` in the scoped path and check for `<PackageId>` or `<AssemblyName>`
+     2. Root namespace — check for `<RootNamespace>` in the `.csproj`
+     3. Assembly name — the `.csproj` filename without extension
+     4. Directory name — last segment of the scoped path, lowercased and hyphenated
+   Confirm with the user: "I'll analyze `<path>` as a scoped package. Based on the project, I'd suggest naming it `<suggested-name>`. Does that work?"
 2. Scan the project (or scoped path) to discover:
    - Project/solution structure (`.sln`, `.slnx`, `.csproj`, `package.json`, `pyproject.toml`, etc.)
    - **Domain model / entities** — data classes, models, DTOs, database entities
