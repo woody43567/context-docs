@@ -57,7 +57,7 @@ You receive:
 - Do NOT remove existing examples unless the source code they reference was deleted
 - Do NOT add prose explanations — keep it terse and example-driven
 - NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`)
-- **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the Context7 community registry or any remote endpoint.
+- **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the community registry or any remote endpoint.
 
 ## Template Reference
 

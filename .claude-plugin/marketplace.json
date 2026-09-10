@@ -8,10 +8,10 @@
       "name": "context-docs",
       "source": "./",
       "description": "AI-optimized context documentation generator for .NET packages. Analyzes projects, generates pattern-focused docs, and maintains them automatically via hooks.",
-      "version": "1.6.3",
+      "version": "1.7.0",
       "category": "development",
       "keywords": [
-        "context7",
+        "context-cli",
         "documentation",
         "dotnet",
         "ai-context"

@@ -1,7 +1,7 @@
 ---
 name: context-docs-init
 description: |
-  Analyze a .NET project and generate AI-optimized context documentation for Context7.
+  Analyze a .NET project and generate AI-optimized context documentation for the context CLI.
   Discovers entities, repositories, patterns, and conventions, then generates searchable docs.
   Supports scoped mode: pass a subfolder path to generate a separate package for just that area.
 user-invocable: true
@@ -11,7 +11,7 @@ user-invocable: true
 
 ## Overview
 
-Analyze a .NET project and generate AI-optimized markdown documentation for serving via Context7. The documentation focuses on patterns, conventions, and real code examples that help AI agents correctly implement against the project's APIs.
+Analyze a .NET project and generate AI-optimized markdown documentation for serving via the context CLI. The documentation focuses on patterns, conventions, and real code examples that help AI agents correctly implement against the project's APIs.
 
 ## Modes
 
@@ -184,7 +184,7 @@ Append new scoped packages to the table if the file already exists. This ensures
 
 3. **Rebuild the main package** after adding the scoped reference so the pointer is included in the main `.db`.
 
-4. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @anthropic/context`
+4. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @neuledge/context`
 
 ### Phase 6: Project Integration
 
@@ -192,12 +192,12 @@ Append new scoped packages to the table if the file already exists. This ensures
 ```markdown
 ## Context Docs
 
-This project has AI-optimized documentation served via Context7. Before implementing against
+This project has AI-optimized documentation served via the context CLI. Before implementing against
 any pattern or domain in this package, query the context server for guidance:
 
 - **Package:** `<package-name>` (<section-count> sections covering patterns, entities, repositories, filters)
 - **Query with short keywords:** e.g. `repository`, `filter handler`, `entity`, `dapper`
-- **Use Context7 MCP tools:** `resolve-library-id` → `get-library-docs` with topic keywords
+- **Use the context CLI MCP tools:** `resolve-library-id` → `get-library-docs` with topic keywords
 
 When you finish a task or phase, check `.ai-context-docs/.stale`. If non-empty, spawn
 the context-updater agent (`.ai-context-docs/agents/context-updater.md`) to update
@@ -227,4 +227,4 @@ For scoped packages, add an additional bullet under the Package list:
 - In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
 - In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
 - NEVER read, document, or include examples from: sensitive files (`appsettings*.json`, `*.secrets.json`, `.env`, `web.config`, `launchSettings.json`, `*.pfx`, `*.pem`, `*.key`, `*.cert`) or planning/dev files (`docs/plans/**`, `.planning/**`, `PLAN.md`, `ROADMAP.md`, `TODO.md`, `.ai-context-docs/**`, `.graphene/**`, `CLAUDE.md`).
-- **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the Context7 community registry or any remote endpoint.
+- **NEVER publish, push, or submit packages to any external registry.** All context packages are private internal documentation. Only use `context add` with local `--save` paths. Do not use `context publish`, `context push`, or any command that uploads to the the context CLI community registry or any remote endpoint.
