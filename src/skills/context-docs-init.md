@@ -10,7 +10,7 @@ Analyze a .NET project and generate AI-optimized markdown documentation for serv
 
 1. Ask the user which project path to analyze (default: current working directory)
 2. Scan the project to discover:
-   - Project/solution structure (`.sln`, `.csproj`, `package.json`, `pyproject.toml`, etc.)
+   - Project/solution structure (`.sln`, `.slnx`, `.csproj`, `package.json`, `pyproject.toml`, etc.)
    - **Domain model / entities** — data classes, models, DTOs, database entities
    - **Data access layer** — repositories, data services, ORM patterns, query builders, database context classes
    - **Filtering / querying patterns** — filter objects, query handlers, specifications, search patterns
