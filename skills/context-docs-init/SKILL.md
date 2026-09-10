@@ -229,7 +229,7 @@ For scoped packages, add an additional bullet under the Package list:
 - Do NOT generate documentation for files you haven't read. Read every source file before documenting it.
 - Do NOT create synthetic examples. Every code block must come from an actual file in the project.
 - Do NOT document test files unless explicitly asked.
-- Ask questions ONE AT A TIME during Phase 2.
+- **ONE question per message. This is critical.** Never combine the Phase 1 naming confirmation with Phase 2 questions. Never ask two Phase 2 questions in the same message. Present the discovery summary, wait for acknowledgement. Ask the package name, wait for confirmation. Then ask each Phase 2 question individually, waiting for a response before proceeding to the next.
 - The manifest (`context.json`) must be generated BEFORE any docs, as it drives the doc structure.
 - In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
 - In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
