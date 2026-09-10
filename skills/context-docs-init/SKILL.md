@@ -172,6 +172,7 @@ Follow these rules:
 Before building the package, review ALL generated docs for leaks. Scan every `.md` file in the docs directory for:
 
 1. **Secrets/keys** — API keys, connection strings, passwords, tokens, bearer strings, base64-encoded secrets, GUIDs that look like keys (not entity IDs)
+   - **Ignore known safe patterns:** `CancellationToken`, `cancellationToken`, method parameter names containing "token" in code signatures, generic type parameters, JWT claim type names — these are code patterns, not secrets
 2. **URLs** — internal URLs, IP addresses, server names, database connection endpoints, staging/production hostnames
 3. **Credentials** — usernames, email addresses in config, service account names
 4. **Proprietary content** — business rules described in prose rather than code structure, algorithm descriptions that reveal trade secrets, pricing logic, licensing mechanisms
@@ -204,9 +205,9 @@ Before building the package, review ALL generated docs for leaks. Scan every `.m
 The following areas have dedicated context packages with more detailed documentation.
 Query these packages directly instead of looking in the main package.
 
-| Package | Scope | Query With |
-|---------|-------|------------|
-| `<package-name>` | `<scope-path>` | `resolve-library-id` → `<package-name>` |
+| Package | Scope | How to Query |
+|---------|-------|--------------|
+| `<package-name>` | `<scope-path>` | `context query <package-name> '<topic>'` |
 ```
 
 Append new scoped packages to the table if the file already exists. This ensures agents querying the main package discover that scoped packages exist and know where to look.
@@ -226,7 +227,7 @@ any pattern or domain in this package, query the context server for guidance:
 
 - **Package:** `<package-name>` (<section-count> sections covering patterns, entities, repositories, filters)
 - **Query with short keywords:** e.g. `repository`, `filter handler`, `entity`, `dapper`
-- **Use the context CLI MCP tools:** `resolve-library-id` → `get-library-docs` with topic keywords
+- **Query:** `context query <package-name> '<keyword>'`
 
 When you finish a task or phase, check `.ai-context-docs/.stale`. If non-empty, spawn
 the context-updater agent (`.ai-context-docs/agents/context-updater.md`) to update
