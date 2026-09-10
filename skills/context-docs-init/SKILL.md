@@ -3,6 +3,7 @@ name: context-docs-init
 description: |
   Analyze a .NET project and generate AI-optimized context documentation for Context7.
   Discovers entities, repositories, patterns, and conventions, then generates searchable docs.
+  Supports scoped mode: pass a subfolder path to generate a separate package for just that area.
 user-invocable: true
 ---
 
@@ -12,12 +13,31 @@ user-invocable: true
 
 Analyze a .NET project and generate AI-optimized markdown documentation for serving via Context7. The documentation focuses on patterns, conventions, and real code examples that help AI agents correctly implement against the project's APIs.
 
+## Modes
+
+This skill operates in two modes:
+
+### Full mode (default)
+```
+/context-docs-init
+```
+Analyzes the entire project. Generates docs in `.ai-context-docs/docs/` with a manifest at `.ai-context-docs/context.json`.
+
+### Scoped mode
+```
+/context-docs-init src/MyPackage
+```
+Analyzes only the specified subfolder. Generates docs in `.ai-context-docs/scoped/<package-name>/docs/` with a separate manifest at `.ai-context-docs/scoped/<package-name>/context.json`. The scoped path is automatically added to the main manifest's exclude list (if one exists) to avoid duplication.
+
+**Determine the mode from the arguments.** If a path argument is provided, use scoped mode. Otherwise, use full mode.
+
 ## Process
 
 ### Phase 1: Project Discovery
 
-1. Ask the user which project path to analyze (default: current working directory)
-2. Scan the project to discover:
+1. **Full mode:** Ask the user which project path to analyze (default: current working directory)
+   **Scoped mode:** Use the provided path argument. Confirm with the user: "I'll analyze `<path>` as a scoped package. What should it be named?"
+2. Scan the project (or scoped path) to discover:
    - Project/solution structure (`.sln`, `.slnx`, `.csproj`, `package.json`, `pyproject.toml`, etc.)
    - **Domain model / entities** — data classes, models, DTOs, database entities
    - **Data access layer** — repositories, data services, ORM patterns, query builders, database context classes
@@ -47,10 +67,15 @@ Ask the following questions **one at a time**. Prefer multiple choice where poss
 3. **Agent pain points:** "Are there patterns or areas where agents consistently get things wrong?" (free text)
 4. **Exclusions:** "Any directories or areas to exclude from documentation?" (default: Tests/**, obj/**, bin/**)
 5. **Package details:** "What should the context package be named?" (suggest based on project name)
+   - **Scoped mode:** This was already asked in Phase 1, skip unless the user wants to change it
 
 ### Phase 3: Generate Manifest
 
-Create `.ai-context-docs/context.json` capturing all preferences from Phase 2. The manifest drives both initial generation and ongoing hook-based maintenance.
+**Full mode:** Create `.ai-context-docs/context.json` capturing all preferences from Phase 2.
+
+**Scoped mode:** Create `.ai-context-docs/scoped/<package-name>/context.json`. Also update the main `.ai-context-docs/context.json` exclude list to add the scoped path (if main manifest exists).
+
+The manifest drives both initial generation and ongoing hook-based maintenance.
 
 Schema:
 ```jsonc
@@ -65,6 +90,7 @@ Schema:
     "framework": "dotnet",
     "solutionFile": "<detected .sln>"
   },
+  "scope": null,
   "focus": {
     "patterns": ["<detected-patterns>"],
     "domains": {
@@ -84,9 +110,14 @@ Schema:
 }
 ```
 
+For scoped manifests, set `"scope": "<relative-path-to-subfolder>"` and make all coverage globs relative to the repo root (not the scoped folder).
+
 ### Phase 4: Generate Documentation
 
-Create the `.ai-context-docs/docs/` tree following these rules:
+**Full mode:** Create the `.ai-context-docs/docs/` tree.
+**Scoped mode:** Create the `.ai-context-docs/scoped/<package-name>/docs/` tree.
+
+Follow these rules:
 
 **Pattern docs (top-level)** — one per detected pattern:
 - Use the pattern doc template
@@ -108,12 +139,17 @@ Create the `.ai-context-docs/docs/` tree following these rules:
 
 ### Phase 5: Build Context Package
 
+**Full mode:**
 1. Run: `context add . --path .ai-context-docs/docs --name <package-name> --pkg-version <version> --save .ai-context-docs/packages/`
+
+**Scoped mode:**
+1. Run: `context add . --path .ai-context-docs/scoped/<package-name>/docs --name <package-name> --pkg-version <version> --save .ai-context-docs/packages/`
+
 2. If `context` CLI is not available, inform the user and provide install instructions: `npm install -g @anthropic/context`
 
 ### Phase 6: Project Integration
 
-1. Add to `CLAUDE.md` (idempotent — check if already present):
+1. Add to `CLAUDE.md` (idempotent — check if already present, append scoped packages to existing section):
 ```markdown
 ## Context Docs
 
@@ -127,6 +163,11 @@ any pattern or domain in this package, query the context server for guidance:
 When you finish a task or phase, check `.ai-context-docs/.stale`. If non-empty, spawn
 the context-updater agent (`.ai-context-docs/agents/context-updater.md`) to update
 documentation. Do not update docs inline.
+```
+
+For scoped packages, add an additional bullet under the Package list:
+```markdown
+- **Package:** `<scoped-package-name>` (<section-count> sections — scoped to `<path>`)
 ```
 
 2. Add `.ai-context-docs/.stale` to `.gitignore`
@@ -144,3 +185,5 @@ documentation. Do not update docs inline.
 - Do NOT document test files unless explicitly asked.
 - Ask questions ONE AT A TIME during Phase 2.
 - The manifest (`context.json`) must be generated BEFORE any docs, as it drives the doc structure.
+- In scoped mode, coverage globs in the manifest must be relative to the repo root, not the scoped folder.
+- In scoped mode, auto-add the scoped path to the main manifest's exclude list to prevent duplication.
